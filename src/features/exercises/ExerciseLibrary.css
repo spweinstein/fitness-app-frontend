@@ -1,0 +1,133 @@
+:root {
+  --exlib-bg: #f7f8fa;
+  --exlib-card-bg: #ffffff;
+  --exlib-border: #e2e4ea;
+  --exlib-text-dark: #111111;
+  --exlib-text-muted: #6b7280;
+  --exlib-accent: #006d77;
+}
+
+.exercise-lib {
+  min-height: calc(100vh - 80px);
+  padding: 32px 20px;
+  background: radial-gradient(
+    circle at top left,
+    #f3f4ff 0,
+    #f7f8fa 35%,
+    #ffffff 100%
+  );
+  font-family:
+    "Inter",
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
+  display: flex;
+  justify-content: center;
+}
+
+.exercise-lib > div {
+  width: 100%;
+  max-width: 1100px;
+  background-color: var(--exlib-card-bg);
+  border-radius: 24px;
+  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.12);
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  padding: 24px 26px 28px;
+  text-align: center;
+}
+
+.exercise-lib h2 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--exlib-text-dark);
+  letter-spacing: -0.03em;
+  margin-bottom: 8px;
+}
+
+.exercise-lib-subtitle {
+  font-size: 0.95rem;
+  color: var(--exlib-text-muted);
+  margin-top: 4px;
+}
+
+.exercise-lib-count {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(0, 109, 119, 0.06);
+  color: var(--exlib-accent);
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.exercise-lib-subtitle,
+.exercise-lib-count {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.exercise-lib ul {
+  list-style: none;
+  margin: 16px 0 0;
+  padding: 0;
+  border-radius: 18px;
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  background: #f9fafb;
+  max-height: 920px;
+  overflow-y: auto;
+}
+
+.exercise-lib li {
+  border-radius: 999px;
+  padding: 10px 14px;
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  background: #f9fafb;
+  font-size: 0.95rem;
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease,
+    background-color 0.15s ease,
+    border-color 0.15s ease;
+}
+
+.exercise-lib li:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 20px rgba(15, 23, 42, 0.12);
+  background: #ffffff;
+  border-color: rgba(148, 163, 184, 0.9);
+}
+
+.exercise-lib a {
+  color: var(--exlib-text-dark);
+  text-decoration: none;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.exercise-lib a:hover {
+  color: var(--exlib-accent);
+  text-decoration: underline;
+}
+
+.exercise-lib-empty {
+  margin-top: 18px;
+  font-size: 0.95rem;
+  color: var(--exlib-text-muted);
+  font-style: italic;
+}
+
+@media (max-width: 640px) {
+  .exercise-lib {
+    padding: 20px 14px;
+  }
+
+  .exercise-lib > div {
+    border-radius: 18px;
+    padding: 20px 18px 22px;
+  }
+}
