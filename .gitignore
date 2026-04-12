@@ -23,4 +23,14 @@ dist-ssr
 *.sln
 *.sw?
 
+# Env (keep example committed)
 .env
+.env.*
+!.env.example
+
+# Test / coverage
+coverage/
+
+# Vite
+.vite/
+*.tsbuildinfo
