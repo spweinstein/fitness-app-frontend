@@ -49,6 +49,13 @@
 }
 
 :root {
+    /* Landing hero palette — shared with NavBar + Landing.css */
+    --accent-teal: #006d77;
+    --accent-teal-bright: #2dd4bf;
+    --hero-surface-deep: #0a1f28;
+    --hero-surface-mid: #0c4a52;
+    --hero-text: #f8fafc;
+
     --background: oklch(1 0 0);
     --foreground: oklch(0.145 0 0);
     --card: oklch(1 0 0);
