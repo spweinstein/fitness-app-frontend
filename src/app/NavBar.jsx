@@ -137,7 +137,8 @@ export default function NavBar() {
   const [open, setOpen] = React.useState(false);
 
   const handleSignOut = React.useCallback(() => {
-    localStorage.removeItem("token");
+    localStorage.removeItem("access_token");
+    localStorage.removeItem("refresh_token");
     setUser(null);
   }, [setUser]);
 
