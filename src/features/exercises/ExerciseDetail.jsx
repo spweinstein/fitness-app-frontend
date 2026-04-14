@@ -59,6 +59,8 @@ const ExerciseDetail = () => {
           <iframe
             src={exercise.video_url}
             title={exercise.name}
+            sandbox="allow-scripts allow-same-origin allow-presentation"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             allowFullScreen
           />
         ) : (
