@@ -14,7 +14,7 @@ describe("apiConfig interceptors", () => {
 
   describe("request interceptor", () => {
     it("adds Authorization header when a token is stored and the path is not auth-free", () => {
-      localStorage.setItem("token", "my-jwt");
+      localStorage.setItem("access_token", "my-jwt");
       const config = { url: "/exercises/", headers: {} };
 
       const result = requestFulfilled(config);
@@ -23,7 +23,7 @@ describe("apiConfig interceptors", () => {
     });
 
     it("skips Authorization header for /users/login/", () => {
-      localStorage.setItem("token", "my-jwt");
+      localStorage.setItem("access_token", "my-jwt");
       const config = { url: "/users/login/", headers: {} };
 
       const result = requestFulfilled(config);
@@ -32,7 +32,7 @@ describe("apiConfig interceptors", () => {
     });
 
     it("skips Authorization header for /users/register/", () => {
-      localStorage.setItem("token", "my-jwt");
+      localStorage.setItem("access_token", "my-jwt");
       const config = { url: "/users/register/", headers: {} };
 
       const result = requestFulfilled(config);
@@ -56,15 +56,17 @@ describe("apiConfig interceptors", () => {
       expect(result).toBe(response);
     });
 
-    it("removes the token and dispatches AUTH_UNAUTHORIZED_EVENT on 401", async () => {
-      localStorage.setItem("token", "my-jwt");
+    it("removes both tokens and dispatches AUTH_UNAUTHORIZED_EVENT on 401", async () => {
+      localStorage.setItem("access_token", "my-jwt");
+      localStorage.setItem("refresh_token", "my-refresh");
       const dispatchSpy = vi.spyOn(window, "dispatchEvent");
       const error = { response: { status: 401 } };
 
       // The rejected handler returns a rejected Promise; capture it before awaiting.
       const promise = responseRejected(error);
 
-      expect(localStorage.getItem("token")).toBeNull();
+      expect(localStorage.getItem("access_token")).toBeNull();
+      expect(localStorage.getItem("refresh_token")).toBeNull();
       expect(dispatchSpy).toHaveBeenCalledWith(
         expect.objectContaining({ type: AUTH_UNAUTHORIZED_EVENT })
       );
@@ -73,12 +75,14 @@ describe("apiConfig interceptors", () => {
       dispatchSpy.mockRestore();
     });
 
-    it("does not remove the token for non-401 errors", async () => {
-      localStorage.setItem("token", "my-jwt");
+    it("does not remove the tokens for non-401 errors", async () => {
+      localStorage.setItem("access_token", "my-jwt");
+      localStorage.setItem("refresh_token", "my-refresh");
       const error = { response: { status: 500 } };
 
       await expect(responseRejected(error)).rejects.toBe(error);
-      expect(localStorage.getItem("token")).toBe("my-jwt");
+      expect(localStorage.getItem("access_token")).toBe("my-jwt");
+      expect(localStorage.getItem("refresh_token")).toBe("my-refresh");
     });
   });
 });
