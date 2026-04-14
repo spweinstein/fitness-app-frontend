@@ -1,5 +1,8 @@
 import axios from "axios";
 
+/** Dispatched when the API returns 401 and the stored token is cleared. */
+export const AUTH_UNAUTHORIZED_EVENT = "auth:unauthorized";
+
 const api = axios.create({
   baseURL: `${import.meta.env.VITE_BACK_END_SERVER_URL}`,
 });
@@ -29,6 +32,9 @@ api.interceptors.response.use(
   (error) => {
     if (error.response?.status === 401) {
       localStorage.removeItem("token");
+      if (typeof window !== "undefined") {
+        window.dispatchEvent(new CustomEvent(AUTH_UNAUTHORIZED_EVENT));
+      }
     }
     return Promise.reject(error);
   }

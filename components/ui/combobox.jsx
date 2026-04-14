@@ -263,6 +263,7 @@ function useComboboxAnchor() {
   return React.useRef(null);
 }
 
+/* eslint-disable react-refresh/only-export-components */
 export {
   Combobox,
   ComboboxInput,
@@ -281,3 +282,4 @@ export {
   ComboboxValue,
   useComboboxAnchor,
 }
+/* eslint-enable react-refresh/only-export-components */
