@@ -12,11 +12,11 @@ const AUTH_FREE_PATHS = ["/users/login/", "/users/register/"];
 api.interceptors.request.use(
   (config) => {
     const isAuthFree = AUTH_FREE_PATHS.some((path) =>
-      config.url?.includes(path)
+      config.url?.includes(path),
     );
 
     if (!isAuthFree) {
-      const token = localStorage.getItem("token");
+      const token = localStorage.getItem("access_token");
       if (token) {
         config.headers.Authorization = `Bearer ${token}`;
       }
@@ -31,13 +31,14 @@ api.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response?.status === 401) {
-      localStorage.removeItem("token");
+      localStorage.removeItem("access_token");
+      localStorage.removeItem("refresh_token");
       if (typeof window !== "undefined") {
         window.dispatchEvent(new CustomEvent(AUTH_UNAUTHORIZED_EVENT));
       }
     }
     return Promise.reject(error);
-  }
+  },
 );
 
 export default api;
