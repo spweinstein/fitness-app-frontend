@@ -18,7 +18,7 @@ const Landing = () => {
         </h1>
 
         <p>
-          The Modern way to track your workouts, manage your diet, and build a
+          The Modern way to track/plan your workouts and build a
           body that lasts a lifetime.
         </p>
 
