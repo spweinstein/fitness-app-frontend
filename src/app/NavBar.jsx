@@ -265,7 +265,7 @@ export default function NavBar() {
   return (
     <header className={navShellHeaderClass}>
       <div className="flex w-full max-w-[600px] flex-col">
-        <div className="flex h-16 justify-between px-6 md:hidden">
+        <div className="flex h-10 justify-between px-6 md:hidden">
           <NavLink
             to="/"
             className={({ isActive }) =>
@@ -335,6 +335,8 @@ export default function NavBar() {
           className="hidden w-full flex-1 py-3 md:flex md:min-h-16 md:items-center md:px-4"
           aria-label="Main"
         >
+
+          
           <ul className="flex w-full flex-wrap items-center justify-start gap-1">
             <li>
               <NavLink
