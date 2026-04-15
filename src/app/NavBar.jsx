@@ -110,7 +110,7 @@ function HealthIsWealthWordmark({ className }) {
  * Sticky shell: matte gradient with a visible mid-teal band (reads on light pages + landing).
  */
 const navShellHeaderClass =
-  "sticky top-0 z-[60] w-full border-b border-[#2dd4bf]/35 bg-gradient-to-br from-[#030709] from-0% via-[#155a63] via-[42%] to-[#050c12] to-100% shadow-[0_4px_24px_rgba(0,0,0,0.5)]";
+  "sticky top-0 z-[40] w-full border-b border-[#2dd4bf]/35 bg-gradient-to-br from-[#030709] from-0% via-[#155a63] via-[42%] to-[#050c12] to-100% shadow-[0_4px_24px_rgba(0,0,0,0.5)]";
 
 const navShellDrawerClass =
   "max-h-[calc(100vh-4rem)] !top-10 border-b border-[#2dd4bf]/35 bg-gradient-to-b from-[#030709] from-0% via-[#155a63] via-[45%] to-[#050c12] to-100%";
@@ -387,7 +387,7 @@ export default function NavBar() {
                       id={EXPLORE_DESKTOP_MENU_ID}
                       role="menu"
                       aria-labelledby="explore-desktop-trigger"
-                      className="absolute left-0 top-full z-[70] mt-1.5 min-w-[13rem] overflow-hidden rounded-xl border border-[#2dd4bf]/35 bg-gradient-to-b from-[#0a1f28] to-[#061016] p-2 shadow-xl ring-1 ring-[#2dd4bf]/20 backdrop-blur-md"
+                      className="absolute left-0 top-full z-[40] mt-1.5 min-w-[13rem] overflow-hidden rounded-xl border border-[#2dd4bf]/35 bg-gradient-to-b from-[#0a1f28] to-[#061016] p-2 shadow-xl ring-1 ring-[#2dd4bf]/20 backdrop-blur-md"
                     >
                       <ul className="flex flex-col gap-0.5" role="none">
                         <li role="none">
