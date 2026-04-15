@@ -127,9 +127,11 @@ Current tests cover:
 
 - `UserContext` (session boot and unauthorized-event handling)
 - sign-in and sign-up form behavior
-- `authService` functions (sign-in, sign-up, sign-out, token verify and refresh)
-- Axios client configuration (request interceptor header injection, response interceptor 401 handling)
+- `authService` (credentials, `verifyUser`, refresh fallback, and clearing storage when refresh fails)
+- `apiConfig` (shared Axios instance, request-time `Authorization` for protected paths, `clearStoredAuth`, `notifyUnauthorized`)
 - all API service modules: exercises, workout templates, workout plans, workouts, profile, and weight logs
+
+The shared client (`apiConfig.js`) configures Axios and attaches `Authorization` on requests whose URLs are not auth-free (login, register, token refresh). `authService.js` handles session boot, refresh after a 401 on `/users/me/`, and session clearing when refresh fails (via `clearStoredAuth` and `notifyUnauthorized` from `apiConfig.js`).
 
 Run tests with:
 

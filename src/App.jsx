@@ -5,7 +5,7 @@ import "./App.css";
 import NavBar from "@/src/app/NavBar.jsx";
 import SignUpForm from "@/src/features/auth/SignUpForm.jsx";
 import SignInForm from "@/src/features/auth/SignInForm.jsx";
-import Landing from "@/src/features/auth/Landing.jsx";
+import Landing from "@/src/app/Landing.jsx";
 import AppLayout from "@/src/shared/layout/AppLayout.jsx";
 import LoadingSpinner from "@/src/shared/feedback/LoadingSpinner.jsx";
 import { parseTabParam } from "@/src/features/training/explore/exploreListUtils.js";

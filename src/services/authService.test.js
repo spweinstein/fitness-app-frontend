@@ -1,15 +1,20 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { signIn, signUp, signOut, verifyUser } from "./authService.js";
 
-// Mock the axios instance so no real HTTP calls are made.
-vi.mock("./apiConfig.js", () => ({
-  default: {
-    post: vi.fn(),
-    get: vi.fn(),
-  },
-}));
+// Mock HTTP on the shared client; keep real helpers (clearStoredAuth, notifyUnauthorized).
+vi.mock(import("./apiConfig.js"), async (importOriginal) => {
+  const actual = await importOriginal();
+  return {
+    ...actual,
+    default: {
+      ...actual.default,
+      post: vi.fn(),
+      get: vi.fn(),
+    },
+  };
+});
 
-// Import after mock so we get the stub.
+// Import after mock so we get the stubbed api.
 const { default: api } = await import("./apiConfig.js");
 
 describe("authService", () => {

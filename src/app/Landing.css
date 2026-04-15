@@ -1,0 +1,209 @@
+/* Landing: scoped tokens (hero uses dark gradient; --accent-teal* from index.css :root) */
+.landing-page {
+  --landing-nav-offset: 80px;
+  --hero-text: #f8fafc;
+  --hero-muted: rgba(248, 250, 252, 0.82);
+  --brand-tag-bg: rgba(255, 255, 255, 0.12);
+  --brand-tag-border: rgba(255, 255, 255, 0.18);
+}
+
+.landing-page {
+  width: 100%;
+  font-family: "Inter", sans-serif;
+}
+
+/* Full-bleed hero: mesh-style gradients + soft vignette (no extra assets) */
+.landing-hero {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100dvh - var(--landing-nav-offset));
+  min-height: calc(100vh - var(--landing-nav-offset));
+  padding: clamp(2rem, 5vw, 3.5rem) clamp(1.25rem, 4vw, 2rem);
+  overflow: hidden;
+  background-color: #0c1929;
+  background-image:
+    radial-gradient(
+      ellipse 120% 80% at 100% 0%,
+      rgba(45, 212, 191, 0.35) 0%,
+      transparent 55%
+    ),
+    radial-gradient(
+      ellipse 90% 70% at 0% 100%,
+      rgba(0, 109, 119, 0.55) 0%,
+      transparent 50%
+    ),
+    linear-gradient(
+      155deg,
+      #050a12 0%,
+      #0a1f28 28%,
+      #0c4a52 58%,
+      #0d3d44 85%,
+      #061016 100%
+    );
+  background-size: cover;
+}
+
+.landing-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse at 50% 50%,
+    transparent 0%,
+    rgba(5, 10, 18, 0.65) 100%
+  );
+}
+
+.landing-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.35;
+  background-image: repeating-linear-gradient(
+    -12deg,
+    rgba(255, 255, 255, 0.03) 0 1px,
+    transparent 1px 5px
+  );
+}
+
+.landing-content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  max-width: 800px;
+  animation: landingFadeIn 0.8s ease-out;
+}
+
+.brand-tag {
+  display: inline-block;
+  background-color: var(--brand-tag-bg);
+  color: var(--accent-teal-bright);
+  border: 1px solid var(--brand-tag-border);
+  padding: 8px 16px;
+  border-radius: 50px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin-bottom: 24px;
+  font-family: "Outfit", sans-serif;
+}
+
+.landing-content h1 {
+  font-family: "Outfit", sans-serif;
+  font-size: clamp(2.8rem, 8vw, 5rem);
+  font-weight: 800;
+  color: var(--hero-text);
+  line-height: 1.1;
+  letter-spacing: -0.04em;
+  margin-bottom: 24px;
+}
+
+.landing-content h1 span {
+  color: var(--accent-teal-bright);
+}
+
+.landing-content p {
+  font-size: clamp(1.1rem, 2.5vw, 1.3rem);
+  color: var(--hero-muted);
+  line-height: 1.65;
+  letter-spacing: 0.01em;
+  max-width: 36rem;
+  margin: 0 auto 40px;
+}
+
+.cta-group {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.cta-group a {
+  text-decoration: none !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn {
+  padding: 16px 32px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: 14px;
+  cursor: pointer;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease,
+    transform 0.3s ease;
+  font-family: "Outfit", sans-serif;
+  border: none;
+}
+
+.landing-page .btn-primary,
+.landing-page .btn-primary:link,
+.landing-page .btn-primary:visited {
+  background-color: #f8fafc !important;
+  color: #0f172a !important;
+  text-decoration: none !important;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.25);
+}
+
+.landing-page .btn-primary:hover {
+  background-color: var(--accent-teal-bright) !important;
+  color: #042f2e !important;
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(45, 212, 191, 0.35);
+}
+
+.landing-page .btn-secondary,
+.landing-page .btn-secondary:link,
+.landing-page .btn-secondary:visited {
+  background-color: rgba(255, 255, 255, 0.06);
+  color: var(--hero-text) !important;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  text-decoration: none !important;
+}
+
+.landing-page .btn-secondary:hover {
+  background-color: rgba(255, 255, 255, 0.14);
+  border-color: rgba(255, 255, 255, 0.55);
+}
+
+@keyframes landingFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .landing-content {
+    animation: none;
+  }
+
+  .landing-page .btn-primary:hover,
+  .landing-page .btn-secondary:hover {
+    transform: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .cta-group {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}

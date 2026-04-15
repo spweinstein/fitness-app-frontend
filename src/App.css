@@ -1,3 +1,24 @@
+/* AppLayout: main fills viewport below sticky nav (~80px); non-landing gets a soft wash */
+.page-root {
+  min-height: calc(100dvh - 5rem);
+}
+
+.page-root--app {
+  background-color: #eef6f5;
+  background-image:
+    radial-gradient(
+      ellipse 110% 75% at 100% 0%,
+      rgba(45, 212, 191, 0.22) 0%,
+      transparent 58%
+    ),
+    radial-gradient(
+      ellipse 95% 70% at 0% 100%,
+      rgba(0, 109, 119, 0.18) 0%,
+      transparent 55%
+    ),
+    linear-gradient(155deg, #e8f4f2 0%, #d9f0ec 32%, #e2e8f0 100%);
+}
+
 html {
   box-sizing: border-box;
 }
