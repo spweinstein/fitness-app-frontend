@@ -31,6 +31,15 @@ import {
   normalizeCatalogResponse,
 } from "@/src/features/training/explore/exploreListUtils.js";
 import { apiErrorMessage } from "@/src/utils/apiErrorMessage.js";
+import { useDebounced } from "@/src/hooks/useDebounced.js";
+
+const exploreSearchDebounceMs = (() => {
+  const n = Number.parseInt(
+    String(import.meta.env.VITE_EXPLORE_SEARCH_DEBOUNCE_MS ?? "300"),
+    10,
+  );
+  return Number.isFinite(n) && n >= 0 ? n : 300;
+})();
 
 function formatPlanOwner(plan) {
   if (plan.username) return plan.username;
@@ -53,6 +62,7 @@ export default function WorkoutPlanList({ page, onPageChange }) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [search, setSearch] = useState("");
+  const debouncedSearch = useDebounced(search, exploreSearchDebounceMs);
   const [viewPlanId, setViewPlanId] = useState(null);
   const [actionBanner, setActionBanner] = useState(null);
 
@@ -82,14 +92,12 @@ export default function WorkoutPlanList({ page, onPageChange }) {
           scope: "public",
           page,
           pageSize: EXPLORE_LIST_PAGE_SIZE,
-          search,
+          search: debouncedSearch,
         });
         if (!cancelled) {
           const { results, count } = normalizeCatalogResponse(data);
           setItems(results);
-          setTotalPages(
-            getTotalPagesFromCount(count, EXPLORE_LIST_PAGE_SIZE),
-          );
+          setTotalPages(getTotalPagesFromCount(count, EXPLORE_LIST_PAGE_SIZE));
         }
       } catch (err) {
         if (!cancelled) {
@@ -102,7 +110,7 @@ export default function WorkoutPlanList({ page, onPageChange }) {
     return () => {
       cancelled = true;
     };
-  }, [page, search]);
+  }, [page, debouncedSearch]);
 
   const safePage = Math.min(Math.max(1, page), totalPages);
 

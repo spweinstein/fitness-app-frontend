@@ -34,6 +34,15 @@ import {
   normalizeCatalogResponse,
 } from "@/src/features/training/explore/exploreListUtils.js";
 import { apiErrorMessage } from "@/src/utils/apiErrorMessage.js";
+import { useDebounced } from "@/src/hooks/useDebounced.js";
+
+const exploreSearchDebounceMs = (() => {
+  const n = Number.parseInt(
+    String(import.meta.env.VITE_EXPLORE_SEARCH_DEBOUNCE_MS ?? "300"),
+    10,
+  );
+  return Number.isFinite(n) && n >= 0 ? n : 300;
+})();
 
 function formatTemplateOwner(t) {
   if (t.username) return t.username;
@@ -56,6 +65,7 @@ export default function WorkoutTemplateList({ page, onPageChange }) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [search, setSearch] = useState("");
+  const debouncedSearch = useDebounced(search, exploreSearchDebounceMs);
   const [viewTemplateId, setViewTemplateId] = useState(null);
   const [scheduleNotice, setScheduleNotice] = useState("");
 
@@ -86,7 +96,7 @@ export default function WorkoutTemplateList({ page, onPageChange }) {
           scope: "public",
           page,
           pageSize: EXPLORE_LIST_PAGE_SIZE,
-          search,
+          search: debouncedSearch,
         });
         if (!cancelled) {
           const { results, count } = normalizeCatalogResponse(data);
@@ -106,7 +116,7 @@ export default function WorkoutTemplateList({ page, onPageChange }) {
     return () => {
       cancelled = true;
     };
-  }, [page, search]);
+  }, [page, debouncedSearch]);
 
   const safePage = Math.min(Math.max(1, page), totalPages);
 
